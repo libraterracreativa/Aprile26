@@ -1131,9 +1131,13 @@ function nextPage(){
 
 document.addEventListener('keydown',function(e){ if(e.key==='ArrowLeft') prevPage(); if(e.key==='ArrowRight') nextPage(); });
 var touchX=0;
-document.addEventListener('touchstart',function(e){ touchX=e.changedTouches[0].screenX; });
-document.addEventListener('touchend',function(e){ var d=touchX-e.changedTouches[0].screenX; if(Math.abs(d)>60){ if(d>0) nextPage(); else prevPage(); } });
-window.addEventListener('resize', buildSpread);
+var touchX=0, touchY=0;
+document.addEventListener('touchstart',function(e){ touchX=e.changedTouches[0].screenX; touchY=e.changedTouches[0].screenY; });
+document.addEventListener('touchend',function(e){
+  var dx=touchX-e.changedTouches[0].screenX;
+  var dy=touchY-e.changedTouches[0].screenY;
+  if(Math.abs(dx)>60 && Math.abs(dx)>Math.abs(dy)*2){ if(dx>0) nextPage(); else prevPage(); }
+});
 
 // NAV
 window.addEventListener('scroll',function(){ document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>50); });
