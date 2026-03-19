@@ -236,11 +236,9 @@
             box-shadow: 0 24px 56px rgba(0,0,0,0.55);
             border-radius: 6px;
             overflow: hidden;
-            transition: opacity 0.35s ease, transform 0.35s ease;
         }
         .spread.turning {
-            opacity: 0.2;
-            transform: scale(0.97);
+            opacity: 0.5;
         }
         .page-img {
             height: 580px;
@@ -1123,8 +1121,12 @@ function updateNavButtons() {
 
 function animateAndChange(fn) {
   const spread = document.getElementById('spread');
-  spread.classList.add('turning');
-  setTimeout(() => { fn(); spread.classList.remove('turning'); }, 350);
+  spread.style.opacity = '0.4';
+  spread.style.transition = 'opacity 0.2s ease';
+  setTimeout(() => {
+    fn();
+    spread.style.opacity = '1';
+  }, 220);
 }
 
 function prevPage() {
@@ -1186,7 +1188,12 @@ sp.addEventListener('touchend', e => {
 window.addEventListener('resize', buildSpread);
 
 buildThumbs();
-buildSpread();
+// Ensure DOM is fully ready before building spread
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', buildSpread);
+} else {
+  buildSpread();
+}
 
 // ===== NAV =====
 window.addEventListener('scroll', () => {
