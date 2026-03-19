@@ -1,1 +1,1290 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Librazine — Aprile 2026 · Libra Terra Creativa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #EAE4CE;
+            --warm-white: #FAF7F0;
+            --gold: #9A6E0E;
+            --gold-light: #BB823A;
+            --sage: #4B5031;
+            --sage-light: #959D6B;
+            --blush: #C4849A;
+            --paper: #F5F0E8;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--sage);
+            overflow-x: hidden;
+        }
+
+        /* ===== NAV ===== */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 18px 0;
+            transition: all 0.4s ease;
+        }
+        .nav.scrolled {
+            background: rgba(234,228,206,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(75,80,49,0.1);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-img { height: 54px; width: auto; }
+        .nav-menu { display: flex; gap: 8px; }
+        .nav-link {
+            color: var(--sage);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+        .nav-link:hover { background: rgba(154,110,14,0.12); color: var(--gold); }
+        .mobile-menu-btn {
+            display: none; background: none; border: none;
+            color: var(--sage); font-size: 24px; cursor: pointer;
+        }
+        .mobile-nav {
+            display: none; position: fixed; top: 68px; left: 0; right: 0;
+            background: rgba(234,228,206,0.98); backdrop-filter: blur(20px);
+            z-index: 999; padding: 16px 24px;
+            border-bottom: 1px solid rgba(75,80,49,0.1);
+        }
+        .mobile-nav.active { display: block; }
+        .mobile-nav a {
+            display: block; padding: 14px 0; color: var(--sage);
+            text-decoration: none; font-weight: 500;
+            border-bottom: 1px solid rgba(75,80,49,0.08);
+            font-size: 15px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+            background: linear-gradient(145deg, #F0EAD6 0%, #DDD4B8 50%, #EAE4CE 100%);
+        }
+        .hero-bg-pattern {
+            position: absolute; inset: 0;
+            background-image:
+              radial-gradient(circle at 15% 20%, rgba(196,132,154,0.13) 0%, transparent 50%),
+              radial-gradient(circle at 85% 80%, rgba(154,110,14,0.11) 0%, transparent 50%),
+              radial-gradient(circle at 50% 50%, rgba(149,157,107,0.06) 0%, transparent 70%);
+        }
+        .hero-line {
+            position: absolute;
+            background: rgba(154,110,14,0.12);
+        }
+        .hero-line-1 { top: 30%; left: 0; right: 0; height: 1px; }
+        .hero-line-2 { top: 70%; left: 0; right: 0; height: 1px; }
+        .hero-line-3 { left: 25%; top: 0; bottom: 0; width: 1px; }
+        .hero-line-4 { left: 75%; top: 0; bottom: 0; width: 1px; }
+
+        .hero-content {
+            text-align: center; z-index: 2; position: relative;
+            padding: 0 20px; animation: heroFadeIn 1.2s ease both;
+        }
+        @keyframes heroFadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-eyebrow {
+            font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 28px; opacity: 0.9;
+        }
+        .hero-logo-img {
+            height: 220px; width: auto;
+            margin-bottom: 28px;
+            filter: drop-shadow(0 20px 40px rgba(154,110,14,0.18));
+            animation: heroFadeIn 1.2s ease 0.2s both;
+        }
+        .hero-magazine-label {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(10px);
+            padding: 10px 28px; border-radius: 40px;
+            border: 1px solid rgba(154,110,14,0.18);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+            animation: heroFadeIn 1.2s ease 0.4s both;
+            margin-bottom: 36px;
+        }
+        .hero-magazine-label span {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem; color: var(--gold); letter-spacing: 0.05em;
+        }
+        .hero-magazine-label small {
+            font-size: 11px; color: var(--sage); opacity: 0.6;
+            letter-spacing: 0.15em; text-transform: uppercase;
+        }
+        .hero-cta {
+            display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+            animation: heroFadeIn 1.2s ease 0.6s both;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: white; padding: 15px 32px; border: none; border-radius: 999px;
+            font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 8px;
+            box-shadow: 0 8px 24px rgba(154,110,14,0.3);
+            transition: all 0.25s ease; letter-spacing: 0.04em;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 32px rgba(154,110,14,0.42);
+        }
+        .btn-secondary {
+            background: rgba(255,255,255,0.55); color: var(--sage);
+            padding: 15px 32px; border: 1.5px solid rgba(75,80,49,0.25);
+            border-radius: 999px; font-size: 14px; font-weight: 500;
+            cursor: pointer; text-decoration: none; transition: all 0.25s ease;
+            letter-spacing: 0.04em; backdrop-filter: blur(8px);
+        }
+        .btn-secondary:hover {
+            border-color: var(--gold); color: var(--gold);
+            background: rgba(154,110,14,0.06);
+        }
+        .scroll-hint {
+            position: absolute; bottom: 28px; left: 50%;
+            transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+            opacity: 0.45; animation: bounce 2.5s infinite;
+            cursor: pointer;
+        }
+        .scroll-hint span {
+            font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--sage);
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ===== MAGAZINE SECTION ===== */
+        .magazine-section {
+            background: var(--sage);
+            padding: 90px 0 80px;
+            position: relative; overflow: hidden;
+        }
+        .magazine-section::before {
+            content: ''; position: absolute; inset: 0;
+            background:
+              radial-gradient(circle at 10% 50%, rgba(154,110,14,0.08) 0%, transparent 50%),
+              radial-gradient(circle at 90% 50%, rgba(196,132,154,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .magazine-header {
+            text-align: center; margin-bottom: 56px;
+            position: relative; z-index: 2;
+            padding: 0 20px;
+        }
+        .magazine-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--cream); font-weight: 400; margin-bottom: 12px;
+        }
+        .magazine-header h2 em {
+            font-style: italic; color: var(--gold-light);
+        }
+        .magazine-header p {
+            color: rgba(234,228,206,0.55); font-size: 12px;
+            letter-spacing: 0.2em; text-transform: uppercase;
+        }
+
+        /* ===== FLIPBOOK ===== */
+        .flipbook-container {
+            position: relative; z-index: 2;
+            max-width: 960px; margin: 0 auto;
+            padding: 0 20px;
+        }
+        .reader-wrapper {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 28px 20px 22px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.45);
+        }
+        .page-display {
+            display: flex; align-items: center; justify-content: center;
+            min-height: 500px;
+            user-select: none;
+        }
+        .spread {
+            display: flex;
+            gap: 3px;
+            box-shadow: 0 24px 56px rgba(0,0,0,0.55);
+            border-radius: 6px;
+            overflow: hidden;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+        .spread.turning {
+            opacity: 0.2;
+            transform: scale(0.97);
+        }
+        .page-img {
+            height: 580px;
+            width: auto;
+            object-fit: cover;
+            display: block;
+            flex-shrink: 0;
+        }
+        .page-img.single {
+            border-radius: 6px;
+            max-height: 600px;
+            height: auto;
+            max-width: 100%;
+        }
+        /* Responsive image sizing */
+        @media (max-width: 900px) {
+            .page-img { height: 440px; }
+        }
+        @media (max-width: 600px) {
+            .page-img { height: auto; width: 100%; max-width: 100%; }
+            .spread { flex-direction: column; }
+        }
+
+        /* Reader nav */
+        .reader-nav {
+            display: flex; align-items: center; justify-content: center;
+            gap: 24px; margin-top: 22px;
+        }
+        .nav-btn {
+            width: 46px; height: 46px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 50%;
+            color: var(--cream); font-size: 20px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s ease; flex-shrink: 0;
+        }
+        .nav-btn:hover:not(:disabled) {
+            background: rgba(154,110,14,0.5);
+            border-color: var(--gold-light);
+            transform: scale(1.08);
+        }
+        .nav-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+        .page-counter {
+            font-size: 13px; color: rgba(234,228,206,0.55);
+            letter-spacing: 0.1em; min-width: 140px; text-align: center;
+        }
+
+        /* Thumbnail strip */
+        .thumb-strip {
+            display: flex; gap: 7px; margin-top: 18px;
+            overflow-x: auto; padding-bottom: 6px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(154,110,14,0.35) transparent;
+        }
+        .thumb-strip::-webkit-scrollbar { height: 3px; }
+        .thumb-strip::-webkit-scrollbar-track { background: transparent; }
+        .thumb-strip::-webkit-scrollbar-thumb { background: rgba(154,110,14,0.4); border-radius: 2px; }
+        .thumb {
+            flex-shrink: 0; width: 56px; height: 76px;
+            object-fit: cover; border-radius: 4px; cursor: pointer;
+            opacity: 0.4; border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .thumb.active { opacity: 1; border-color: var(--gold-light); box-shadow: 0 4px 14px rgba(154,110,14,0.4); }
+        .thumb:hover:not(.active) { opacity: 0.75; }
+
+        /* Magazine actions */
+        .magazine-actions {
+            display: flex; justify-content: center; gap: 14px;
+            margin-top: 36px; position: relative; z-index: 2;
+        }
+        .btn-ghost {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            color: var(--cream); padding: 14px 28px; border-radius: 999px;
+            font-size: 14px; font-weight: 500; text-decoration: none;
+            transition: all 0.25s ease; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-ghost:hover {
+            background: rgba(154,110,14,0.35);
+            border-color: var(--gold-light);
+        }
+
+        /* ===== EVENTS SECTION ===== */
+        .events-section {
+            background: var(--warm-white);
+            padding: 90px 30px 80px;
+        }
+        .events-inner { max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-label {
+            font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 14px; display: block;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--sage); font-weight: 400; margin-bottom: 14px;
+        }
+        .section-sub { color: var(--sage); opacity: 0.55; font-size: 15px; max-width: 520px; margin: 0 auto; }
+
+        .group-header {
+            display: flex; align-items: center; gap: 20px; margin-bottom: 32px; margin-top: 56px;
+        }
+        .group-header:first-of-type { margin-top: 0; }
+        .group-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 2.5vw, 1.9rem); color: var(--sage); font-weight: 400;
+            white-space: nowrap;
+        }
+        .group-line { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(75,80,49,0.18), transparent); }
+
+        /* Weekly cards */
+        .weekly-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 18px;
+        }
+        .weekly-card {
+            background: white; border-radius: 16px; padding: 26px;
+            border: 1px solid rgba(75,80,49,0.08);
+            box-shadow: 0 4px 18px rgba(0,0,0,0.04);
+            transition: all 0.25s ease;
+        }
+        .weekly-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 36px rgba(0,0,0,0.1);
+            border-color: rgba(154,110,14,0.18);
+        }
+        .day-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--sage) 0%, var(--sage-light) 100%);
+            color: white; font-size: 10px; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            padding: 5px 13px; border-radius: 20px; margin-bottom: 14px;
+        }
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem; color: var(--gold); margin-bottom: 5px; line-height: 1.3;
+        }
+        .card-instructor { font-size: 13px; color: var(--sage); opacity: 0.65; margin-bottom: 10px; font-style: italic; }
+        .card-time { font-size: 12px; color: var(--sage-light); font-weight: 500; margin-bottom: 16px; }
+
+        /* Monthly event cards */
+        .events-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 18px;
+        }
+        .event-card {
+            background: white; border-radius: 16px; padding: 24px 24px 24px 28px;
+            border: 1px solid rgba(75,80,49,0.08);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+            transition: all 0.25s ease; position: relative; overflow: hidden;
+        }
+        .event-card::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+            width: 4px; background: var(--sage-light);
+            border-radius: 4px 0 0 4px;
+        }
+        .event-card.gold::before { background: linear-gradient(180deg, var(--gold) 0%, var(--gold-light) 100%); }
+        .event-card.blush::before { background: var(--blush); }
+        .event-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 38px rgba(0,0,0,0.1);
+            border-color: rgba(154,110,14,0.14);
+        }
+        .date-chip {
+            display: inline-flex; align-items: center;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: white; font-size: 11px; font-weight: 600;
+            padding: 5px 14px; border-radius: 20px; margin-bottom: 12px;
+            box-shadow: 0 3px 10px rgba(154,110,14,0.28);
+            letter-spacing: 0.05em;
+        }
+        .event-card.blush .date-chip { background: linear-gradient(135deg, #C4849A, #A8657E); box-shadow: 0 3px 10px rgba(168,101,126,0.28); }
+        .event-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem; color: var(--sage); margin-bottom: 5px; line-height: 1.35;
+        }
+        .event-instructor { font-size: 13px; color: var(--gold); margin-bottom: 8px; font-style: italic; }
+        .event-note { font-size: 12px; color: var(--sage); opacity: 0.6; margin-bottom: 16px; line-height: 1.5; }
+
+        /* Shared button */
+        .book-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: white; padding: 10px 20px; border-radius: 999px;
+            font-size: 13px; font-weight: 500; text-decoration: none;
+            box-shadow: 0 4px 14px rgba(154,110,14,0.28);
+            transition: all 0.2s ease; border: none; cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .book-btn::after { content: '→'; transition: transform 0.2s ease; }
+        .book-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(154,110,14,0.4); }
+        .book-btn:hover::after { transform: translateX(3px); }
+
+        /* ===== CONTACTS ===== */
+        .contact-section { background: var(--cream); padding: 80px 30px; }
+        .contact-inner { max-width: 1000px; margin: 0 auto; }
+        .contact-grid {
+            display: grid; grid-template-columns: 1fr 1.3fr; gap: 36px;
+            margin-top: 50px;
+        }
+        .contact-card {
+            background: white; border-radius: 20px; padding: 36px;
+            border: 1px solid rgba(75,80,49,0.1);
+            box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+        }
+        .contact-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem; color: var(--gold); margin-bottom: 22px; font-weight: 400;
+        }
+        .contact-item { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+        .contact-icon {
+            width: 32px; height: 32px; background: rgba(154,110,14,0.1);
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            font-size: 14px; flex-shrink: 0; margin-top: 1px;
+        }
+        .contact-text { font-size: 14px; color: var(--sage); line-height: 1.6; }
+        .contact-text a { color: var(--gold); text-decoration: none; }
+        .contact-text a:hover { text-decoration: underline; }
+        .map-embed { border-radius: 20px; overflow: hidden; box-shadow: 0 8px 28px rgba(0,0,0,0.1); }
+
+        /* ===== FOOTER ===== */
+        .footer { background: var(--sage); color: var(--cream); padding: 70px 30px 30px; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; }
+        .footer-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px; margin-bottom: 48px;
+        }
+        .footer-col h4 {
+            font-family: 'Playfair Display', serif; font-size: 1.1rem;
+            color: var(--gold-light); margin-bottom: 18px; font-weight: 400;
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 10px; }
+        .footer-col a { color: rgba(234,228,206,0.65); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--gold-light); }
+        .footer-col p { color: rgba(234,228,206,0.65); font-size: 14px; line-height: 1.85; }
+        .social-row { display: flex; gap: 10px; margin-top: 18px; }
+        .social-btn {
+            width: 38px; height: 38px; background: rgba(255,255,255,0.08);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: all 0.2s ease;
+        }
+        .social-btn:hover { background: var(--gold); transform: translateY(-2px); }
+        .social-btn svg { width: 16px; height: 16px; fill: var(--cream); }
+        .footer-bottom {
+            border-top: 1px solid rgba(234,228,206,0.12);
+            padding-top: 24px; text-align: center;
+            font-size: 12px; color: rgba(234,228,206,0.35); letter-spacing: 0.05em;
+        }
+
+        /* ===== BOOKING FLOAT ===== */
+        .booking-float {
+            position: fixed; bottom: 90px; left: 50%;
+            transform: translateX(-50%); z-index: 999;
+        }
+        .booking-float-btn {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: white; border: none; padding: 15px 28px; border-radius: 40px;
+            font-size: 14px; font-weight: 600; cursor: pointer;
+            box-shadow: 0 8px 30px rgba(154,110,14,0.45);
+            animation: pulse 3s infinite;
+            letter-spacing: 0.04em; white-space: nowrap;
+            font-family: 'DM Sans', sans-serif;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 8px 28px rgba(154,110,14,0.42); }
+            50% { box-shadow: 0 12px 40px rgba(154,110,14,0.62); }
+        }
+        .booking-float-btn:hover { transform: translateY(-2px) scale(1.02); }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.62);
+            display: none; align-items: center; justify-content: center;
+            z-index: 2000; padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: white; border-radius: 20px; padding: 36px;
+            max-width: 580px; width: 100%; max-height: 88vh;
+            overflow-y: auto; position: relative;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.28);
+        }
+        .modal-close {
+            position: absolute; top: 14px; right: 18px;
+            background: none; border: none; font-size: 22px;
+            color: var(--sage); cursor: pointer; opacity: 0.55; transition: opacity 0.2s;
+        }
+        .modal-close:hover { opacity: 1; }
+        .modal h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem; color: var(--gold); margin-bottom: 6px;
+        }
+        .modal-sub { font-size: 14px; color: var(--sage); opacity: 0.65; margin-bottom: 24px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+            text-transform: uppercase; color: var(--sage); margin-bottom: 7px; opacity: 0.7;
+        }
+        .form-input {
+            width: 100%; padding: 11px 14px;
+            border: 1.5px solid rgba(75,80,49,0.2);
+            border-radius: 10px; font-size: 14px; font-family: 'DM Sans', sans-serif;
+            background: white; transition: all 0.2s ease; color: var(--sage);
+        }
+        .form-input:focus {
+            outline: none; border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(154,110,14,0.1);
+        }
+        .events-list-label {
+            font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+            text-transform: uppercase; color: var(--sage); opacity: 0.7;
+            margin-bottom: 10px; margin-top: 20px; display: block;
+        }
+        .event-check-item {
+            display: flex; align-items: flex-start; gap: 10px;
+            padding: 10px 12px; border-radius: 10px;
+            background: rgba(234,228,206,0.28); margin-bottom: 7px;
+            transition: background 0.2s ease; cursor: pointer;
+        }
+        .event-check-item:hover { background: rgba(234,228,206,0.5); }
+        .event-check-item input[type=checkbox] {
+            margin-top: 3px; accent-color: var(--gold); transform: scale(1.1); cursor: pointer;
+        }
+        .event-check-name { font-size: 13px; font-weight: 500; color: var(--sage); line-height: 1.3; }
+        .event-check-meta { font-size: 11px; color: var(--sage); opacity: 0.6; margin-top: 2px; }
+        .form-actions { display: flex; gap: 10px; margin-top: 22px; }
+        .btn-form-primary {
+            flex: 1; padding: 13px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: white; border: none; border-radius: 10px;
+            font-size: 15px; font-weight: 600; cursor: pointer;
+            transition: all 0.2s ease; font-family: 'DM Sans', sans-serif;
+        }
+        .btn-form-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(154,110,14,0.3); }
+        .btn-form-cancel {
+            padding: 13px 20px; background: rgba(75,80,49,0.07);
+            color: var(--sage); border: none; border-radius: 10px;
+            font-size: 15px; cursor: pointer; transition: all 0.2s ease;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .btn-form-cancel:hover { background: rgba(75,80,49,0.14); }
+        .form-msg {
+            padding: 11px 16px; border-radius: 10px; margin-bottom: 16px;
+            font-size: 14px; font-weight: 500;
+        }
+        .form-msg.success { background: rgba(40,167,69,0.09); color: #28a745; border: 1px solid rgba(40,167,69,0.22); }
+        .form-msg.error { background: rgba(220,53,69,0.07); color: #dc3545; border: 1px solid rgba(220,53,69,0.18); }
+
+        /* WhatsApp */
+        .wa-float {
+            position: fixed; bottom: 26px; right: 26px;
+            width: 54px; height: 54px; background: #25D366;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+            z-index: 99999; transition: all 0.25s ease; text-decoration: none;
+        }
+        .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(37,211,102,0.55); }
+        .wa-float svg { width: 26px; height: 26px; fill: white; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .mobile-menu-btn { display: block; }
+            .hero-logo-img { height: 160px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .events-grid { grid-template-columns: 1fr; }
+            .weekly-grid { grid-template-columns: 1fr; }
+            .booking-float { bottom: 80px; width: 90%; text-align: center; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .hero-cta { flex-direction: column; align-items: center; }
+            .hero-magazine-label { flex-wrap: wrap; justify-content: center; }
+        }
+        html { scroll-behavior: smooth; }
+        #rivista { scroll-margin-top: 0; }
+        #eventi { scroll-margin-top: 80px; }
+        #contatti { scroll-margin-top: 80px; }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="nav-container">
+    <img src="assets/LIBRA LOGOTIPO PNG_Tavola disegno 1.png" alt="Libra Terra Creativa" class="logo-img">
+    <div class="nav-menu">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#rivista" class="nav-link">Librazine</a>
+      <a href="#eventi" class="nav-link">Eventi Aprile</a>
+      <a href="#contatti" class="nav-link">Contatti</a>
+    </div>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#home" onclick="closeMobileMenu()">Home</a>
+  <a href="#rivista" onclick="closeMobileMenu()">Librazine</a>
+  <a href="#eventi" onclick="closeMobileMenu()">Eventi Aprile</a>
+  <a href="#contatti" onclick="closeMobileMenu()">Contatti</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-line hero-line-1"></div>
+  <div class="hero-line hero-line-2"></div>
+  <div class="hero-line hero-line-3"></div>
+  <div class="hero-line hero-line-4"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Pietrasanta · Via Santa Maria 33</p>
+    <img src="assets/LIBRA PITTOGRAMMA PNG_Tavola disegno 1.png" alt="Libra" class="hero-logo-img">
+    <div class="hero-magazine-label">
+      <span>Librazine</span>
+      <small>·</small>
+      <small>Aprile 2026 &nbsp;·&nbsp; n. 5</small>
+    </div>
+    <div class="hero-cta">
+      <a href="#rivista" class="btn-primary">Sfoglia la Rivista</a>
+      <a href="#contatti" class="btn-secondary">Dove Siamo</a>
+    </div>
+  </div>
+  <div class="scroll-hint" onclick="document.getElementById('rivista').scrollIntoView({behavior:'smooth'})">
+    <span>Scorri</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </div>
+</section>
+
+<!-- RIVISTA SFOGLIABILE -->
+<section class="magazine-section" id="rivista">
+  <div class="magazine-header">
+    <h2>La nostra <em>Rivista</em></h2>
+    <p>Librazine &nbsp;·&nbsp; Aprile 2026 &nbsp;·&nbsp; Numero 5</p>
+  </div>
+
+  <div class="flipbook-container">
+    <div class="reader-wrapper">
+      <div class="page-display">
+        <div class="spread" id="spread"></div>
+      </div>
+      <div class="reader-nav">
+        <button class="nav-btn" id="prevBtn" onclick="prevPage()">&#8249;</button>
+        <span class="page-counter" id="pageCounter">Pagina 1 di 12</span>
+        <button class="nav-btn" id="nextBtn" onclick="nextPage()">&#8250;</button>
+      </div>
+      <div class="thumb-strip" id="thumbStrip"></div>
+    </div>
+  </div>
+
+  <div class="magazine-actions">
+    <a href="#eventi" class="btn-ghost">Scopri gli eventi di Aprile ↓</a>
+  </div>
+</section>
+
+<!-- EVENTI -->
+<section class="events-section" id="eventi">
+  <div class="events-inner">
+    <div class="section-header">
+      <span class="section-label">Aprile 2026</span>
+      <h2 class="section-title">Programma del mese</h2>
+      <p class="section-sub">Clicca su "Prenota" per riservare il tuo posto</p>
+    </div>
+
+    <!-- SETTIMANALI -->
+    <div class="group-header">
+      <h3>Appuntamenti fissi</h3>
+      <div class="group-line"></div>
+    </div>
+    <div class="weekly-grid">
+
+      <div class="weekly-card">
+        <span class="day-badge">Lun – Sab · Su appuntamento</span>
+        <div class="card-title">Allenamento Funzionale Personalizzato</div>
+        <div class="card-instructor">con Simone Gatti</div>
+        <div class="card-time">Percorso individuale su misura</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20info%20sull'Allenamento%20Funzionale%20Personalizzato." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="weekly-card">
+        <span class="day-badge">Martedì · 17:00–18:00</span>
+        <div class="card-title">Yoga Mamma &amp; Bebè</div>
+        <div class="card-instructor">con Silvia Callarelli</div>
+        <div class="card-time">Movimento dolce, respiro e ascolto del corpo</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20info%20per%20Yoga%20Mamma%20%26%20Beb%C3%A8." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="weekly-card">
+        <span class="day-badge">Martedì · 18:15–19:15</span>
+        <div class="card-title">Hatha Yoga</div>
+        <div class="card-instructor">con Silvia Callarelli</div>
+        <div class="card-time">Movimento, respiro e pavimento pelvico</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20info%20per%20Hatha%20Yoga." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="weekly-card">
+        <span class="day-badge">Mercoledì · Dal 22 Apr · 18:30–20:00</span>
+        <div class="card-title">Femme Fit Flow</div>
+        <div class="card-instructor">con Lisa Zini</div>
+        <div class="card-time">8 incontri · partecipazione libera ai singoli</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20info%20per%20Femme%20Fit%20Flow." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="weekly-card">
+        <span class="day-badge">Domenica · 11:30–15:00</span>
+        <div class="card-title">Ultimate Vegan Brunch</div>
+        <div class="card-instructor">cucina vegetale da Libra</div>
+        <div class="card-time">Ogni domenica del mese</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20il%20brunch%20della%20domenica%20di%20aprile." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="weekly-card">
+        <span class="day-badge">Lun 15–17:30 · Dom 16–18:30</span>
+        <div class="card-title">Corso di Ceramica</div>
+        <div class="card-instructor">con Linda Bianchi Cervini</div>
+        <div class="card-time">Modellare, decorare, portare a casa</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20info%20per%20il%20Corso%20di%20Ceramica." class="book-btn">Prenota</a>
+      </div>
+
+    </div>
+
+    <!-- MENSILI -->
+    <div class="group-header">
+      <h3>Eventi del mese</h3>
+      <div class="group-line"></div>
+    </div>
+    <div class="events-grid">
+
+      <div class="event-card gold">
+        <div class="date-chip">Sab 4 · 18:00–21:00</div>
+        <div class="event-title">Alchimia dei Fermentati</div>
+        <div class="event-instructor">con Andrea Rossi &amp; Vanessa Parducci</div>
+        <div class="event-note">Fermentazione e Medicina Tradizionale Cinese</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20Alchimia%20dei%20Fermentati%20del%204%20aprile." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card">
+        <div class="date-chip">Dom 5 · 11:30–15:00</div>
+        <div class="event-title">Brunch di Pasqua</div>
+        <div class="event-instructor">cucina vegetale da Libra</div>
+        <div class="event-note">Brunch speciale per la domenica di Pasqua</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20il%20Brunch%20di%20Pasqua%20del%205%20aprile." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card">
+        <div class="date-chip">Lun 6 · Dalle 12:00</div>
+        <div class="event-title">Grigliata Vegetale di Pasquetta</div>
+        <div class="event-instructor">con Alfredo d'Adamo</div>
+        <div class="event-note">Pranzo conviviale di Pasquetta alla griglia</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20la%20Grigliata%20Vegetale%20di%20Pasquetta." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card gold">
+        <div class="date-chip">Ven 10 + Sab 11</div>
+        <div class="event-title">Love of Photography Workshop</div>
+        <div class="event-instructor">con Serena Rossi</div>
+        <div class="event-note">Ven 16:30–20:00 · Sab 8:30–16:30 · Wedding Photography Full Immersion</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20Love%20of%20Photography%20Workshop." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card">
+        <div class="date-chip">Dom 12 · 11:00–12:30</div>
+        <div class="event-title">Arteterapia "Germogli di Meraviglia"</div>
+        <div class="event-instructor">con Irene Tovani</div>
+        <div class="event-note">Laboratorio per bambini 3–10 anni · colori naturali</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20Arteterapia%20Bambini%20del%2012%20aprile." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card">
+        <div class="date-chip">Dom 12 · 11:00–13:00</div>
+        <div class="event-title">Fiori di Bach (incontro 2 di 3)</div>
+        <div class="event-instructor">con Tania Giannecchini</div>
+        <div class="event-note">I 38 fiori come archetipi dell'anima umana</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20Fiori%20di%20Bach%20del%2012%20aprile." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card">
+        <div class="date-chip">Lun 13 · 17:30–19:30</div>
+        <div class="event-title">Comunicazione Nonviolenta · Presentazione</div>
+        <div class="event-instructor">con Giacomo Poleschi</div>
+        <div class="event-note">Incontro gratuito + aperitivo facoltativo · prenotazione obbligatoria</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20la%20Comunicazione%20Nonviolenta%20del%2013%20aprile." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card gold">
+        <div class="date-chip">Ven 17 · 15:00–21:00</div>
+        <div class="event-title">Corso di Cucina Vegetale &amp; Cena</div>
+        <div class="event-instructor">con Alfredo d'Adamo</div>
+        <div class="event-note">Pasta fresca &amp; ripieni vegetali con cena conviviale finale</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20Cucina%20Vegetale%20e%20Cena%20del%2017%20aprile." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card">
+        <div class="date-chip">Ven 17 · 18:30–20:00</div>
+        <div class="event-title">Breathe &amp; Reset</div>
+        <div class="event-instructor">con Lisa Zini</div>
+        <div class="event-note">Viaggio di respiro lento · rilassamento e sonno rigenerante</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20Breathe%20%26%20Reset%20del%2017%20aprile." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card">
+        <div class="date-chip">Sab 18 · 9:30–11:00</div>
+        <div class="event-title">Wake up &amp; Breathe</div>
+        <div class="event-instructor">con Lisa Zini</div>
+        <div class="event-note">Respiro attivante per iniziare la giornata con energia</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20Wake%20up%20%26%20Breathe%20del%2018%20aprile." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card gold">
+        <div class="date-chip">Sab 18 · 16:00–19:00</div>
+        <div class="event-title">Vivere da Svegli Experience</div>
+        <div class="event-instructor">con Roberta Ciro</div>
+        <div class="event-note">Workshop coaching somatico · presenza e consapevolezza</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20Vivere%20da%20Svegli%20del%2018%20aprile." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card blush">
+        <div class="date-chip">Sab 18 · Dalle 20:30</div>
+        <div class="event-title">Il Volto dell'Angelo · Lettura Serale</div>
+        <div class="event-instructor">con Nerella Petrini</div>
+        <div class="event-note">Attraversare il sonno come atto di coscienza · aperitivo dalle 19:30</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20la%20Lettura%20Serale%20del%2018%20aprile." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card">
+        <div class="date-chip">Dom 19 · 17:00–18:15</div>
+        <div class="event-title">Presentazione libro "La felicità in un pianto"</div>
+        <div class="event-instructor">con Giulia Antongiovanni</div>
+        <div class="event-note">Sopravvivere al lutto perinatale · incontro gratuito + aperitivo</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20la%20presentazione%20del%20libro%20del%2019%20aprile." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card">
+        <div class="date-chip">Lun 20 · 18:00–20:00</div>
+        <div class="event-title">Cibo ed Emozioni: Saper Armonizzare</div>
+        <div class="event-instructor">con Francesca Ciuffi</div>
+        <div class="event-note">Buona Alimentazione · 7° incontro del percorso</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20Cibo%20ed%20Emozioni%20del%2020%20aprile." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card gold">
+        <div class="date-chip">Sab 25 · 20:30</div>
+        <div class="event-title">Haleli Handpan Duo · Concerto Meditativo</div>
+        <div class="event-instructor">con Alessandro Salvini &amp; Elisa Mirana Moreschi</div>
+        <div class="event-note">Strumenti ancestrali · food &amp; drink inclusi</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20il%20Concerto%20Meditativo%20Haleli%20del%2025%20aprile." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card gold">
+        <div class="date-chip">Dom 26 · 14:00–19:30</div>
+        <div class="event-title">Wim Hof Method · Libera il tuo Fuoco</div>
+        <div class="event-instructor">con Andrea Bianchi (WHM Certified)</div>
+        <div class="event-note">Respirazione, esposizione al freddo, mindset</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20Wim%20Hof%20Method%20del%2026%20aprile." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card">
+        <div class="date-chip">Dom 26 · 15:00–16:30</div>
+        <div class="event-title">Primo Tocco · Handpan Workshop</div>
+        <div class="event-instructor">con Haleli Handpan Duo</div>
+        <div class="event-note">Max 7 persone · strumenti inclusi · aperto a tutti</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20Primo%20Tocco%20Handpan%20del%2026%20aprile." class="book-btn">Prenota</a>
+      </div>
+
+      <div class="event-card blush">
+        <div class="date-chip">Lun 27 + Mar 28</div>
+        <div class="event-title">Pulizia Transgenerazionale</div>
+        <div class="event-instructor">con Raffaella Tomasi</div>
+        <div class="event-note">Sessioni individuali 90 min · su appuntamento · 10 posti disponibili</div>
+        <a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20vorrei%20prenotare%20la%20Pulizia%20Transgenerazionale." class="book-btn">Prenota</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTATTI -->
+<section class="contact-section" id="contatti">
+  <div class="contact-inner">
+    <div class="section-header">
+      <span class="section-label">Vieni a trovarci</span>
+      <h2 class="section-title">Dove Siamo</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h4>Libra Terra Creativa</h4>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-text">Via Santa Maria 33<br>Pietrasanta (LU)</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="contact-text"><a href="tel:+393491408666">+39 349 140 8666</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div class="contact-text"><a href="mailto:librapietrasanta@gmail.com">librapietrasanta@gmail.com</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📸</div>
+          <div class="contact-text"><a href="https://www.instagram.com/librapietrasanta" target="_blank">@librapietrasanta</a></div>
+        </div>
+        <div style="margin-top:24px;">
+          <a href="https://t.me/+ZI55kD1rIlM0MTBk" target="_blank" class="book-btn" style="background:linear-gradient(135deg,#0088cc,#006aab);">
+            Unisciti al Canale Telegram
+          </a>
+        </div>
+      </div>
+      <div class="map-embed">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2882.4!2d10.2289!3d43.9596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d4f0c8f5e9c123%3A0x1a2b3c4d5e6f7890!2sVia%20Santa%20Maria%2C%20Pietrasanta%20LU%2C%20Italy!5e0!3m2!1sit!2sit!4v1693234567890"
+          width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Navigazione</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#rivista">Librazine</a></li>
+          <li><a href="#eventi">Eventi Aprile</a></li>
+          <li><a href="#contatti">Contatti</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contatti</h4>
+        <p>Via Santa Maria 33<br>Pietrasanta, Lucca<br>
+        <a href="tel:+393491408666">+39 349 140 8666</a><br>
+        <a href="mailto:librapietrasanta@gmail.com">librapietrasanta@gmail.com</a></p>
+        <div class="social-row">
+          <a href="https://www.instagram.com/librapietrasanta" target="_blank" class="social-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/></svg>
+          </a>
+          <a href="https://wa.me/393491408666" target="_blank" class="social-btn">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.539c-.103.348.257.691.605.588l4.715-1.394A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.642-.5-5.168-1.361l-3.638 1.075 1.091-3.56A9.962 9.962 0 0 1 2 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+          </a>
+          <a href="mailto:librapietrasanta@gmail.com" class="social-btn">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Orari</h4>
+        <p>Eventi su prenotazione<br>Lunedì – Domenica<br><br>Prenotazione consigliata<br>con almeno 48h di anticipo</p>
+      </div>
+      <div class="footer-col">
+        <h4>Resta Aggiornata</h4>
+        <p style="margin-bottom:16px;">Unisciti al canale Telegram per aggiornamenti settimanali sugli eventi.</p>
+        <a href="https://t.me/+ZI55kD1rIlM0MTBk" target="_blank" class="book-btn" style="background:linear-gradient(135deg,#0088cc,#006aab);font-size:13px;padding:10px 18px;">
+          Canale Telegram
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Libra Terra Creativa &nbsp;·&nbsp; Via Santa Maria 33, Pietrasanta &nbsp;·&nbsp; Design Maria Fontana
+    </div>
+  </div>
+</footer>
+
+<!-- BOOKING FLOAT -->
+<div class="booking-float">
+  <button class="booking-float-btn" onclick="openModal()">🗓 Prenota Attività</button>
+</div>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/393491408666?text=Ciao%20Libra%2C%20ho%20una%20domanda%20sugli%20eventi%20di%20aprile!" class="wa-float" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.539c-.103.348.257.691.605.588l4.715-1.394A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.642-.5-5.168-1.361l-3.638 1.075 1.091-3.56A9.962 9.962 0 0 1 2 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+</a>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h3>Prenota Attività</h3>
+    <p class="modal-sub">Seleziona uno o più eventi e inviaci la richiesta</p>
+    <div id="formMsg"></div>
+    <div class="form-group">
+      <label>Nome Completo *</label>
+      <input type="text" id="user_name" class="form-input" placeholder="Il tuo nome">
+    </div>
+    <div class="form-group">
+      <label>Email *</label>
+      <input type="email" id="user_email" class="form-input" placeholder="tua@email.com">
+    </div>
+    <div class="form-group">
+      <label>Telefono *</label>
+      <input type="tel" id="user_phone" class="form-input" placeholder="+39 ...">
+    </div>
+    <span class="events-list-label">Seleziona gli eventi:</span>
+    <div id="eventsCheckboxes"></div>
+    <div class="form-group" style="margin-top:16px;">
+      <label>Note aggiuntive</label>
+      <textarea id="user_message" class="form-input" rows="3" placeholder="Allergie, richieste particolari..."></textarea>
+    </div>
+    <div class="form-actions">
+      <button class="btn-form-cancel" onclick="closeModal()">Annulla</button>
+      <button class="btn-form-primary" onclick="submitBooking()">Invia Prenotazione</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+// ===== FLIPBOOK =====
+const pages = [
+  'assets/1.jpg','assets/2.jpg','assets/3.jpg','assets/4.jpg',
+  'assets/5.jpg','assets/6.jpg','assets/7.jpg','assets/8.jpg',
+  'assets/9.jpg','assets/10.jpg','assets/11.jpg','assets/12.jpg'
+];
+
+let currentPage = 0;
+
+function isTwoPage() { return window.innerWidth >= 720; }
+
+function buildSpread() {
+  const spread = document.getElementById('spread');
+  spread.innerHTML = '';
+
+  if (isTwoPage() && currentPage + 1 < pages.length) {
+    const img1 = new Image();
+    img1.className = 'page-img';
+    img1.src = pages[currentPage];
+    img1.alt = 'Pagina ' + (currentPage + 1);
+
+    const img2 = new Image();
+    img2.className = 'page-img';
+    img2.src = pages[currentPage + 1];
+    img2.alt = 'Pagina ' + (currentPage + 2);
+
+    spread.appendChild(img1);
+    spread.appendChild(img2);
+  } else {
+    const img = new Image();
+    img.className = 'page-img single';
+    img.src = pages[currentPage];
+    img.alt = 'Pagina ' + (currentPage + 1);
+    spread.appendChild(img);
+  }
+
+  updateCounter();
+  updateNavButtons();
+  updateThumbs();
+}
+
+function updateCounter() {
+  const c = document.getElementById('pageCounter');
+  if (isTwoPage() && currentPage + 1 < pages.length) {
+    c.textContent = 'Pagine ' + (currentPage+1) + '–' + (currentPage+2) + ' di ' + pages.length;
+  } else {
+    c.textContent = 'Pagina ' + (currentPage+1) + ' di ' + pages.length;
+  }
+}
+
+function updateNavButtons() {
+  document.getElementById('prevBtn').disabled = currentPage === 0;
+  document.getElementById('nextBtn').disabled =
+    isTwoPage() ? currentPage + 2 >= pages.length : currentPage + 1 >= pages.length;
+}
+
+function animateAndChange(fn) {
+  const spread = document.getElementById('spread');
+  spread.classList.add('turning');
+  setTimeout(() => { fn(); spread.classList.remove('turning'); }, 350);
+}
+
+function prevPage() {
+  if (currentPage === 0) return;
+  animateAndChange(() => {
+    currentPage = isTwoPage() ? Math.max(0, currentPage - 2) : currentPage - 1;
+    buildSpread();
+  });
+}
+
+function nextPage() {
+  const step = isTwoPage() ? 2 : 1;
+  if (currentPage + step >= pages.length) return;
+  animateAndChange(() => { currentPage += step; buildSpread(); });
+}
+
+function goToPage(idx) {
+  animateAndChange(() => { currentPage = idx; buildSpread(); });
+}
+
+function buildThumbs() {
+  const strip = document.getElementById('thumbStrip');
+  pages.forEach((src, idx) => {
+    const img = document.createElement('img');
+    img.className = 'thumb' + (idx === 0 ? ' active' : '');
+    img.src = src;
+    img.alt = 'Pagina ' + (idx + 1);
+    img.title = 'Vai a pagina ' + (idx + 1);
+    img.onclick = () => goToPage(idx);
+    strip.appendChild(img);
+  });
+}
+
+function updateThumbs() {
+  document.querySelectorAll('.thumb').forEach((t, i) => {
+    const active = isTwoPage()
+      ? (i === currentPage || i === currentPage + 1)
+      : i === currentPage;
+    t.classList.toggle('active', active);
+    if (active) t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  });
+}
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') prevPage();
+  if (e.key === 'ArrowRight') nextPage();
+});
+
+// Touch swipe
+let touchX = 0;
+const sp = document.getElementById('spread');
+sp.addEventListener('touchstart', e => { touchX = e.changedTouches[0].screenX; });
+sp.addEventListener('touchend', e => {
+  const d = touchX - e.changedTouches[0].screenX;
+  if (Math.abs(d) > 50) d > 0 ? nextPage() : prevPage();
+});
+
+window.addEventListener('resize', buildSpread);
+
+buildThumbs();
+buildSpread();
+
+// ===== NAV =====
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+});
+function toggleMobileMenu() { document.getElementById('mobileNav').classList.toggle('active'); }
+function closeMobileMenu() { document.getElementById('mobileNav').classList.remove('active'); }
+
+// ===== MODAL =====
+const eventsData = [
+  { id: 'fermentati', title: 'Alchimia dei Fermentati', meta: 'Sab 4 · 18:00–21:00 · con Andrea Rossi & Vanessa Parducci' },
+  { id: 'pasqua', title: 'Brunch di Pasqua', meta: 'Dom 5 · 11:30–15:00' },
+  { id: 'grigliata', title: 'Grigliata Vegetale di Pasquetta', meta: "Lun 6 · dalle 12:00 · con Alfredo d'Adamo" },
+  { id: 'photography', title: 'Love of Photography Workshop', meta: 'Ven 10 + Sab 11 · con Serena Rossi' },
+  { id: 'arteterapia', title: 'Arteterapia "Germogli di Meraviglia"', meta: 'Dom 12 · 11:00–12:30 · con Irene Tovani · 3-10 anni' },
+  { id: 'fiori', title: 'Fiori di Bach (2 di 3)', meta: 'Dom 12 · 11:00–13:00 · con Tania Giannecchini' },
+  { id: 'cnv', title: 'Comunicazione Nonviolenta · Presentazione', meta: 'Lun 13 · 17:30–19:30 · con Giacomo Poleschi · Gratuito' },
+  { id: 'cucina', title: 'Corso di Cucina Vegetale & Cena', meta: "Ven 17 · 15:00–21:00 · con Alfredo d'Adamo" },
+  { id: 'breathe', title: 'Breathe & Reset', meta: 'Ven 17 · 18:30–20:00 · con Lisa Zini' },
+  { id: 'wakeup', title: 'Wake up & Breathe', meta: 'Sab 18 · 9:30–11:00 · con Lisa Zini' },
+  { id: 'svegli', title: 'Vivere da Svegli Experience', meta: 'Sab 18 · 16:00–19:00 · con Roberta Ciro' },
+  { id: 'angelo', title: "Il Volto dell'Angelo · Lettura Serale", meta: 'Sab 18 · dalle 20:30 · con Nerella Petrini' },
+  { id: 'libro', title: '"La felicità in un pianto" · Presentazione', meta: 'Dom 19 · 17:00–18:15 · con Giulia Antongiovanni · Gratuito' },
+  { id: 'cibo', title: 'Cibo ed Emozioni: Saper Armonizzare', meta: 'Lun 20 · 18:00–20:00 · con Francesca Ciuffi' },
+  { id: 'haleli', title: 'Haleli Handpan Duo · Concerto Meditativo', meta: 'Sab 25 · 20:30 · food & drink inclusi' },
+  { id: 'wimhof', title: 'Wim Hof Method', meta: 'Dom 26 · 14:00–19:30 · con Andrea Bianchi' },
+  { id: 'handpan', title: 'Primo Tocco · Handpan Workshop', meta: 'Dom 26 · 15:00–16:30 · max 7 persone' },
+  { id: 'transgenerazionale', title: 'Pulizia Transgenerazionale', meta: 'Lun 27 + Mar 28 · con Raffaella Tomasi · 10 posti' },
+  { id: 'allenamento', title: 'Allenamento Funzionale Personalizzato', meta: 'Lun–Sab · su appuntamento · con Simone Gatti' },
+  { id: 'yoga_mamma', title: 'Yoga Mamma & Bebè', meta: 'Ogni martedì 17:00–18:00 · con Silvia Callarelli' },
+  { id: 'hatha', title: 'Hatha Yoga', meta: 'Ogni martedì 18:15–19:15 · con Silvia Callarelli' },
+  { id: 'femme', title: 'Femme Fit Flow', meta: 'Ogni mercoledì 18:30–20:00 · con Lisa Zini · dal 22 apr' },
+  { id: 'brunch', title: 'Ultimate Vegan Brunch', meta: 'Ogni domenica 11:30–15:00' },
+  { id: 'ceramica', title: 'Corso di Ceramica', meta: 'Lun 15–17:30 · Dom 16–18:30 · con Linda Bianchi Cervini' },
+];
+
+(function buildCheckboxes() {
+  const c = document.getElementById('eventsCheckboxes');
+  c.innerHTML = eventsData.map(e => `
+    <div class="event-check-item">
+      <input type="checkbox" id="chk_${e.id}" name="event" value="${e.title} · ${e.meta}">
+      <div>
+        <div class="event-check-name">${e.title}</div>
+        <div class="event-check-meta">${e.meta}</div>
+      </div>
+    </div>`).join('');
+})();
+
+function openModal() {
+  document.getElementById('bookingModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('bookingModal').classList.remove('active');
+  document.body.style.overflow = 'auto';
+  document.getElementById('formMsg').innerHTML = '';
+}
+
+emailjs.init("3LZyp-vRsblaN_zcY");
+
+function submitBooking() {
+  const name = document.getElementById('user_name').value.trim();
+  const email = document.getElementById('user_email').value.trim();
+  const phone = document.getElementById('user_phone').value.trim();
+  const msg = document.getElementById('user_message').value.trim();
+  const msgDiv = document.getElementById('formMsg');
+
+  if (!name || !email || !phone) {
+    msgDiv.innerHTML = '<div class="form-msg error">Compila tutti i campi obbligatori.</div>';
+    return;
+  }
+  const selected = [...document.querySelectorAll('input[name="event"]:checked')].map(cb => cb.value);
+  if (!selected.length) {
+    msgDiv.innerHTML = '<div class="form-msg error">Seleziona almeno un evento.</div>';
+    return;
+  }
+
+  const btn = document.querySelector('.btn-form-primary');
+  btn.textContent = 'Invio in corso...';
+  btn.disabled = true;
+
+  const params = {
+    user_name: name, user_email: email, user_phone: phone,
+    selected_events: selected.join('\n'),
+    message: msg || 'Nessuna nota aggiuntiva',
+    to_email: 'librapietrasanta@gmail.com',
+    booking_date: new Date().toLocaleDateString('it-IT'),
+    booking_time: new Date().toLocaleTimeString('it-IT')
+  };
+
+  emailjs.send('service_epmymzx', 'template_vdmqqm3', params)
+    .then(() => emailjs.send('service_epmymzx', 'template_fmudhsj', {...params, to_email: email}))
+    .then(() => {
+      msgDiv.innerHTML = '<div class="form-msg success">Prenotazione inviata! Ti risponderemo al più presto. 🌿</div>';
+      setTimeout(closeModal, 2600);
+    })
+    .catch(() => {
+      msgDiv.innerHTML = '<div class="form-msg error">Errore. Riprova o scrivici su WhatsApp.</div>';
+    })
+    .finally(() => { btn.textContent = 'Invia Prenotazione'; btn.disabled = false; });
+}
+</script>
+</body>
+</html>
