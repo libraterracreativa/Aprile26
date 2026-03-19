@@ -1054,220 +1054,156 @@
   </div>
 </div>
 
-// ===== FLIPBOOK =====
-const pages = [
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+// FLIPBOOK
+var pages = [
   'assets/1.jpg','assets/2.jpg','assets/3.jpg','assets/4.jpg',
   'assets/5.jpg','assets/6.jpg','assets/7.jpg','assets/8.jpg',
   'assets/9.jpg','assets/10.jpg','assets/11.jpg','assets/12.jpg'
 ];
+var currentPage = 0;
 
-let currentPage = 0;
+function isTwoPage(){ return window.innerWidth >= 720; }
 
-function isTwoPage() { return window.innerWidth > 720; }
-
-function buildSpread() {
-  const spread = document.getElementById('spread');
-  if (!spread) return;
+function buildSpread(){
+  var spread = document.getElementById('spread');
+  if(!spread) return;
   spread.innerHTML = '';
-
-  if (isTwoPage() && currentPage + 1 < pages.length) {
-    const img1 = document.createElement('img');
-    img1.className = 'page-img';
-    img1.src = pages[currentPage];
-    img1.alt = 'Pagina ' + (currentPage + 1);
-
-    const img2 = document.createElement('img');
-    img2.className = 'page-img';
-    img2.src = pages[currentPage + 1];
-    img2.alt = 'Pagina ' + (currentPage + 2);
-
-    spread.appendChild(img1);
-    spread.appendChild(img2);
+  if(isTwoPage() && currentPage+1 < pages.length){
+    var a = document.createElement('img'); a.className='page-img'; a.src=pages[currentPage]; a.alt='Pagina '+(currentPage+1);
+    var b = document.createElement('img'); b.className='page-img'; b.src=pages[currentPage+1]; b.alt='Pagina '+(currentPage+2);
+    spread.appendChild(a); spread.appendChild(b);
   } else {
-    const img = document.createElement('img');
-    img.className = 'page-img single';
-    img.src = pages[currentPage];
-    img.alt = 'Pagina ' + (currentPage + 1);
+    var img = document.createElement('img'); img.className='page-img single'; img.src=pages[currentPage]; img.alt='Pagina '+(currentPage+1);
     spread.appendChild(img);
   }
-  updateCounter();
-  updateNavButtons();
-  updateThumbs();
+  updateCounter(); updateNavButtons(); updateThumbs();
 }
 
-function updateCounter() {
-  const c = document.getElementById('pageCounter');
-  if (!c) return;
-  if (isTwoPage() && currentPage + 1 < pages.length) {
-    c.textContent = 'Pagine ' + (currentPage+1) + '-' + (currentPage+2) + ' di ' + pages.length;
-  } else {
-    c.textContent = 'Pagina ' + (currentPage+1) + ' di ' + pages.length;
-  }
+function updateCounter(){
+  var c = document.getElementById('pageCounter'); if(!c) return;
+  c.textContent = isTwoPage() && currentPage+1 < pages.length
+    ? 'Pagine '+(currentPage+1)+'–'+(currentPage+2)+' di '+pages.length
+    : 'Pagina '+(currentPage+1)+' di '+pages.length;
 }
 
-function updateNavButtons() {
-  document.getElementById('prevBtn').disabled = currentPage === 0;
-  document.getElementById('nextBtn').disabled = isTwoPage()
-    ? currentPage + 2 >= pages.length
-    : currentPage + 1 >= pages.length;
+function updateNavButtons(){
+  var p=document.getElementById('prevBtn'), n=document.getElementById('nextBtn');
+  if(p) p.disabled = currentPage===0;
+  if(n) n.disabled = isTwoPage() ? currentPage+2>=pages.length : currentPage+1>=pages.length;
 }
 
-function animateAndChange(fn) {
-  const spread = document.getElementById('spread');
-  spread.classList.add('turning');
-  setTimeout(() => { fn(); spread.classList.remove('turning'); }, 350);
-}
-
-function prevPage() {
-  if (currentPage === 0) return;
-  animateAndChange(() => {
-    currentPage = isTwoPage() ? Math.max(0, currentPage - 2) : currentPage - 1;
-    buildSpread();
+function updateThumbs(){
+  document.querySelectorAll('.thumb').forEach(function(t,i){
+    var active = isTwoPage() ? (i===currentPage||i===currentPage+1) : i===currentPage;
+    t.classList.toggle('active', active);
+    if(active) t.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
   });
 }
 
-function nextPage() {
-  const step = isTwoPage() ? 2 : 1;
-  if (currentPage + step >= pages.length) return;
-  animateAndChange(() => { currentPage += step; buildSpread(); });
-}
-
-function goToPage(idx) {
-  animateAndChange(() => { currentPage = idx; buildSpread(); });
-}
-
-function buildThumbs() {
-  const strip = document.getElementById('thumbStrip');
-  if (!strip) return;
-  strip.innerHTML = '';
-  pages.forEach((src, idx) => {
-    const img = document.createElement('img');
-    img.className = 'thumb' + (idx === 0 ? ' active' : '');
-    img.src = src;
-    img.alt = 'Pagina ' + (idx + 1);
-    img.title = 'Vai a pagina ' + (idx + 1);
-    img.onclick = () => goToPage(idx);
+function buildThumbs(){
+  var strip = document.getElementById('thumbStrip'); if(!strip) return;
+  pages.forEach(function(src,idx){
+    var img=document.createElement('img');
+    img.className='thumb'+(idx===0?' active':'');
+    img.src=src; img.alt='Pagina '+(idx+1); img.title='Vai a pagina '+(idx+1);
+    img.onclick=function(){ goToPage(idx); };
     strip.appendChild(img);
   });
 }
 
-function updateThumbs() {
-  document.querySelectorAll('.thumb').forEach((t, i) => {
-    const active = isTwoPage()
-      ? (i === currentPage || i === currentPage + 1)
-      : i === currentPage;
-    t.classList.toggle('active', active);
-    if (active) t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-  });
+function goToPage(idx){
+  var s=document.getElementById('spread'); s.style.opacity='0.3';
+  setTimeout(function(){ currentPage=idx; buildSpread(); s.style.opacity='1'; }, 200);
+}
+function prevPage(){
+  if(currentPage===0) return;
+  var s=document.getElementById('spread'); s.style.opacity='0.3';
+  setTimeout(function(){ currentPage=isTwoPage()?Math.max(0,currentPage-2):currentPage-1; buildSpread(); s.style.opacity='1'; },200);
+}
+function nextPage(){
+  var step=isTwoPage()?2:1; if(currentPage+step>=pages.length) return;
+  var s=document.getElementById('spread'); s.style.opacity='0.3';
+  setTimeout(function(){ currentPage+=step; buildSpread(); s.style.opacity='1'; },200);
 }
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowLeft') prevPage();
-  if (e.key === 'ArrowRight') nextPage();
-});
+document.addEventListener('keydown',function(e){ if(e.key==='ArrowLeft') prevPage(); if(e.key==='ArrowRight') nextPage(); });
+var touchX=0;
+document.addEventListener('touchstart',function(e){ touchX=e.changedTouches[0].screenX; });
+document.addEventListener('touchend',function(e){ var d=touchX-e.changedTouches[0].screenX; if(Math.abs(d)>60){ if(d>0) nextPage(); else prevPage(); } });
+window.addEventListener('resize', buildSpread);
 
-let touchX = 0;
-const sp = document.getElementById('spread');
-if (sp) {
-  sp.addEventListener('touchstart', (e) => { touchX = e.changedTouches.screenX; });
-  sp.addEventListener('touchend', (e) => {
-    const d = touchX - e.changedTouches.screenX;
-    if (Math.abs(d) > 50) d > 0 ? nextPage() : prevPage();
-  });
-}
+// NAV
+window.addEventListener('scroll',function(){ document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>50); });
+function toggleMobileMenu(){ document.getElementById('mobileNav').classList.toggle('active'); }
+function closeMobileMenu(){ document.getElementById('mobileNav').classList.remove('active'); }
 
-window.addEventListener('resize', () => { buildSpread(); buildThumbs(); });
-buildThumbs();
-buildSpread();
-
-// ===== NAV =====
-window.addEventListener('scroll', () => {
-  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
-});
-function toggleMobileMenu() { document.getElementById('mobileNav').classList.toggle('active'); }
-function closeMobileMenu() { document.getElementById('mobileNav').classList.remove('active'); }
-
-// ===== MODAL =====
-const eventsData = [
-  { id: 'fermentati', title: 'Alchimia dei Fermentati', meta: 'Sab 4 · 18:00–21:00 · con Andrea Rossi & Vanessa Parducci' },
-  { id: 'pasqua', title: 'Brunch di Pasqua', meta: 'Dom 5 · 11:30–15:00' },
-  { id: 'grigliata', title: 'Grigliata Vegetale di Pasquetta', meta: "Lun 6 · dalle 12:00 · con Alfredo d'Adamo" },
-  { id: 'photography', title: 'Love of Photography Workshop', meta: 'Ven 10 + Sab 11 · con Serena Rossi' },
-  { id: 'arteterapia', title: 'Arteterapia "Germogli di Meraviglia"', meta: 'Dom 12 · 11:00–12:30 · con Irene Tovani · 3-10 anni' },
-  { id: 'fiori', title: 'Fiori di Bach (2 di 3)', meta: 'Dom 12 · 11:00–13:00 · con Tania Giannecchini' },
-  { id: 'cnv', title: 'Comunicazione Nonviolenta · Presentazione', meta: 'Lun 13 · 17:30–19:30 · con Giacomo Poleschi · Gratuito' },
-  { id: 'cucina', title: 'Corso di Cucina Vegetale & Cena', meta: "Ven 17 · 15:00–21:00 · con Alfredo d'Adamo" },
-  { id: 'breathe', title: 'Breathe & Reset', meta: 'Ven 17 · 18:30–20:00 · con Lisa Zini' },
-  { id: 'wakeup', title: 'Wake up & Breathe', meta: 'Sab 18 · 9:30–11:00 · con Lisa Zini' },
-  { id: 'svegli', title: 'Vivere da Svegli Experience', meta: 'Sab 18 · 16:00–19:00 · con Roberta Ciro' },
-  { id: 'angelo', title: "Il Volto dell'Angelo · Lettura Serale", meta: 'Sab 18 · dalle 20:30 · con Nerella Petrini' },
-  { id: 'libro', title: '"La felicità in un pianto" · Presentazione', meta: 'Dom 19 · 17:00–18:15 · con Giulia Antongiovanni · Gratuito' },
-  { id: 'cibo', title: 'Cibo ed Emozioni: Saper Armonizzare', meta: 'Lun 20 · 18:00–20:00 · con Francesca Ciuffi' },
-  { id: 'haleli', title: 'Haleli Handpan Duo · Concerto Meditativo', meta: 'Sab 25 · 20:30 · food & drink inclusi' },
-  { id: 'wimhof', title: 'Wim Hof Method', meta: 'Dom 26 · 14:00–19:30 · con Andrea Bianchi' },
-  { id: 'handpan', title: 'Primo Tocco · Handpan Workshop', meta: 'Dom 26 · 15:00–16:30 · max 7 persone' },
-  { id: 'transgenerazionale', title: 'Pulizia Transgenerazionale', meta: 'Lun 27 + Mar 28 · con Raffaella Tomasi · 10 posti' },
-  { id: 'allenamento', title: 'Allenamento Funzionale Personalizzato', meta: 'Lun–Sab · su appuntamento · con Simone Gatti' },
-  { id: 'yoga_mamma', title: 'Yoga Mamma & Bebè', meta: 'Ogni martedì 17:00–18:00 · con Silvia Callarelli' },
-  { id: 'hatha', title: 'Hatha Yoga', meta: 'Ogni martedì 18:15–19:15 · con Silvia Callarelli' },
-  { id: 'femme', title: 'Femme Fit Flow', meta: 'Ogni mercoledì 18:30–20:00 · con Lisa Zini · dal 22 apr' },
-  { id: 'brunch', title: 'Ultimate Vegan Brunch', meta: 'Ogni domenica 11:30–15:00' },
-  { id: 'ceramica', title: 'Corso di Ceramica', meta: 'Lun 15–17:30 · Dom 16–18:30 · con Linda Bianchi Cervini' },
+// MODAL
+var eventsData=[
+  {id:'fermentati',title:'Alchimia dei Fermentati',meta:'Sab 4 · 18:00–21:00 · con Andrea Rossi & Vanessa Parducci'},
+  {id:'pasqua',title:'Brunch di Pasqua',meta:'Dom 5 · 11:30–15:00'},
+  {id:'grigliata',title:'Grigliata Vegetale di Pasquetta',meta:"Lun 6 · dalle 12:00 · con Alfredo d'Adamo"},
+  {id:'photography',title:'Love of Photography Workshop',meta:'Ven 10 + Sab 11 · con Serena Rossi'},
+  {id:'arteterapia',title:'Arteterapia Germogli di Meraviglia',meta:'Dom 12 · 11:00–12:30 · con Irene Tovani'},
+  {id:'fiori',title:'Fiori di Bach (2 di 3)',meta:'Dom 12 · 11:00–13:00 · con Tania Giannecchini'},
+  {id:'cnv',title:'Comunicazione Nonviolenta · Presentazione',meta:'Lun 13 · 17:30–19:30 · Gratuito'},
+  {id:'cucina',title:'Corso di Cucina Vegetale & Cena',meta:"Ven 17 · 15:00–21:00 · con Alfredo d'Adamo"},
+  {id:'breathe',title:'Breathe & Reset',meta:'Ven 17 · 18:30–20:00 · con Lisa Zini'},
+  {id:'wakeup',title:'Wake up & Breathe',meta:'Sab 18 · 9:30–11:00 · con Lisa Zini'},
+  {id:'svegli',title:'Vivere da Svegli Experience',meta:'Sab 18 · 16:00–19:00 · con Roberta Ciro'},
+  {id:'angelo',title:"Il Volto dell'Angelo · Lettura Serale",meta:'Sab 18 · dalle 20:30 · con Nerella Petrini'},
+  {id:'libro',title:'La felicita in un pianto · Presentazione',meta:'Dom 19 · 17:00–18:15 · Gratuito'},
+  {id:'cibo',title:'Cibo ed Emozioni: Saper Armonizzare',meta:'Lun 20 · 18:00–20:00 · con Francesca Ciuffi'},
+  {id:'haleli',title:'Haleli Handpan Duo · Concerto Meditativo',meta:'Sab 25 · 20:30 · food & drink inclusi'},
+  {id:'wimhof',title:'Wim Hof Method',meta:'Dom 26 · 14:00–19:30 · con Andrea Bianchi'},
+  {id:'handpan',title:'Primo Tocco · Handpan Workshop',meta:'Dom 26 · 15:00–16:30 · max 7 persone'},
+  {id:'transgenerazionale',title:'Pulizia Transgenerazionale',meta:'Lun 27 + Mar 28 · con Raffaella Tomasi'},
+  {id:'allenamento',title:'Allenamento Funzionale Personalizzato',meta:'Lun–Sab · su appuntamento · con Simone Gatti'},
+  {id:'yoga_mamma',title:'Yoga Mamma & Bebe',meta:'Ogni martedi 17:00–18:00 · con Silvia Callarelli'},
+  {id:'hatha',title:'Hatha Yoga',meta:'Ogni martedi 18:15–19:15 · con Silvia Callarelli'},
+  {id:'femme',title:'Femme Fit Flow',meta:'Ogni mercoledi 18:30–20:00 · con Lisa Zini'},
+  {id:'brunch',title:'Ultimate Vegan Brunch',meta:'Ogni domenica 11:30–15:00'},
+  {id:'ceramica',title:'Corso di Ceramica',meta:'Lun 15–17:30 · Dom 16–18:30 · con Linda Bianchi Cervini'}
 ];
 
-(function buildCheckboxes() {
-  const c = document.getElementById('eventsCheckboxes');
-  c.innerHTML = eventsData.map(e => `
-    <div class="event-check-item">
-      <input type="checkbox" id="chk_${e.id}" name="event" value="${e.title} · ${e.meta}">
-      <div>
-        <div class="event-check-name">${e.title}</div>
-        <div class="event-check-meta">${e.meta}</div>
-      </div>
-    </div>`).join('');
+(function(){
+  var c=document.getElementById('eventsCheckboxes'); if(!c) return;
+  c.innerHTML=eventsData.map(function(e){
+    return '<div class="event-check-item"><input type="checkbox" id="chk_'+e.id+'" name="event" value="'+e.title+' · '+e.meta+'"><div><div class="event-check-name">'+e.title+'</div><div class="event-check-meta">'+e.meta+'</div></div></div>';
+  }).join('');
 })();
 
-function openModal() {
-  document.getElementById('bookingModal').classList.add('active');
-  document.body.style.overflow = 'hidden';
+function openModal(){ document.getElementById('bookingModal').classList.add('active'); document.body.style.overflow='hidden'; }
+function closeModal(){ document.getElementById('bookingModal').classList.remove('active'); document.body.style.overflow='auto'; document.getElementById('formMsg').innerHTML=''; }
+
+emailjs.init('3LZyp-vRsblaN_zcY');
+
+function submitBooking(){
+  var name=document.getElementById('user_name').value.trim();
+  var email=document.getElementById('user_email').value.trim();
+  var phone=document.getElementById('user_phone').value.trim();
+  var msg=document.getElementById('user_message').value.trim();
+  var msgDiv=document.getElementById('formMsg');
+  if(!name||!email||!phone){ msgDiv.innerHTML='<div class="form-msg error">Compila tutti i campi obbligatori.</div>'; return; }
+  var selected=Array.from(document.querySelectorAll('input[name="event"]:checked')).map(function(cb){ return cb.value; });
+  if(!selected.length){ msgDiv.innerHTML='<div class="form-msg error">Seleziona almeno un evento.</div>'; return; }
+  var btn=document.querySelector('.btn-form-primary');
+  btn.textContent='Invio in corso...'; btn.disabled=true;
+  var params={ user_name:name, user_email:email, user_phone:phone, selected_events:selected.join('\n'), message:msg||'Nessuna nota aggiuntiva', to_email:'librapietrasanta@gmail.com', booking_date:new Date().toLocaleDateString('it-IT'), booking_time:new Date().toLocaleTimeString('it-IT') };
+  emailjs.send('service_epmymzx','template_vdmqqm3',params)
+    .then(function(){ return emailjs.send('service_epmymzx','template_fmudhsj',Object.assign({},params,{to_email:email})); })
+    .then(function(){ msgDiv.innerHTML='<div class="form-msg success">Prenotazione inviata! Ti risponderemo al piu presto.</div>'; setTimeout(closeModal,2600); })
+    .catch(function(){ msgDiv.innerHTML='<div class="form-msg error">Errore. Riprova o scrivici su WhatsApp.</div>'; })
+    .finally(function(){ btn.textContent='Invia Prenotazione'; btn.disabled=false; });
 }
-function closeModal() {
-  document.getElementById('bookingModal').classList.remove('active');
-  document.body.style.overflow = 'auto';
-  document.getElementById('formMsg').innerHTML = '';
-}
 
-emailjs.init("3LZyp-vRsblaN_zcY");
-
-function submitBooking() {
-  const name = document.getElementById('user_name').value.trim();
-  const email = document.getElementById('user_email').value.trim();
-  const phone = document.getElementById('user_phone').value.trim();
-  const msg = document.getElementById('user_message').value.trim();
-  const msgDiv = document.getElementById('formMsg');
-
-  if (!name || !email || !phone) {
-    msgDiv.innerHTML = '<div class="form-msg error">Compila tutti i campi obbligatori.</div>';
-    return;
-  }
-  const selected = [...document.querySelectorAll('input[name="event"]:checked')].map(cb => cb.value);
-  if (!selected.length) {
-    msgDiv.innerHTML = '<div class="form-msg error">Seleziona almeno un evento.</div>';
-    return;
-  }
-
-  const btn = document.querySelector('.btn-form-primary');
-  btn.textContent = 'Invio in corso...';
-  btn.disabled = true;
-
-  const params = {
-    user_name: name, user_email: email, user_phone: phone,
-    selected_events: selected.join('\n'),
-    message: msg || 'Nessuna nota aggiuntiva',
-    to_email: 'librapietrasanta@gmail.com',
-    booking_date: new Date().toLocaleDateString('it-IT'),
-    booking_time: new Date().toLocaleTimeString('it-IT')
-  };
-
-  emailjs.send('service_epmymzx', 'template_vdmqqm3', params)
-    .then(() => emailjs.send('service_epmymzx', 'template_fmudhsj', {.
+// INIT
+document.addEventListener('DOMContentLoaded', function(){
+  buildThumbs();
+  buildSpread();
+});
+</script>
+</body>
+</html>
