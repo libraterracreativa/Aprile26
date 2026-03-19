@@ -1062,26 +1062,26 @@ const pages = [
   'assets/5.jpg','assets/6.jpg','assets/7.jpg','assets/8.jpg',
   'assets/9.jpg','assets/10.jpg','assets/11.jpg','assets/12.jpg'
 ];
- 
+
 let currentPage = 0;
- 
+
 function isTwoPage() { return window.innerWidth >= 720; }
- 
+
 function buildSpread() {
   const spread = document.getElementById('spread');
   spread.innerHTML = '';
- 
+
   if (isTwoPage() && currentPage + 1 < pages.length) {
     const img1 = new Image();
     img1.className = 'page-img';
     img1.src = pages[currentPage];
     img1.alt = 'Pagina ' + (currentPage + 1);
- 
+
     const img2 = new Image();
     img2.className = 'page-img';
     img2.src = pages[currentPage + 1];
     img2.alt = 'Pagina ' + (currentPage + 2);
- 
+
     spread.appendChild(img1);
     spread.appendChild(img2);
   } else {
@@ -1091,12 +1091,12 @@ function buildSpread() {
     img.alt = 'Pagina ' + (currentPage + 1);
     spread.appendChild(img);
   }
- 
+
   updateCounter();
   updateNavButtons();
   updateThumbs();
 }
- 
+
 function updateCounter() {
   const c = document.getElementById('pageCounter');
   if (isTwoPage() && currentPage + 1 < pages.length) {
@@ -1105,19 +1105,19 @@ function updateCounter() {
     c.textContent = 'Pagina ' + (currentPage+1) + ' di ' + pages.length;
   }
 }
- 
+
 function updateNavButtons() {
   document.getElementById('prevBtn').disabled = currentPage === 0;
   document.getElementById('nextBtn').disabled =
     isTwoPage() ? currentPage + 2 >= pages.length : currentPage + 1 >= pages.length;
 }
- 
+
 function animateAndChange(fn) {
   const spread = document.getElementById('spread');
   spread.classList.add('turning');
   setTimeout(() => { fn(); spread.classList.remove('turning'); }, 350);
 }
- 
+
 function prevPage() {
   if (currentPage === 0) return;
   animateAndChange(() => {
@@ -1125,17 +1125,17 @@ function prevPage() {
     buildSpread();
   });
 }
- 
+
 function nextPage() {
   const step = isTwoPage() ? 2 : 1;
   if (currentPage + step >= pages.length) return;
   animateAndChange(() => { currentPage += step; buildSpread(); });
 }
- 
+
 function goToPage(idx) {
   animateAndChange(() => { currentPage = idx; buildSpread(); });
 }
- 
+
 function buildThumbs() {
   const strip = document.getElementById('thumbStrip');
   pages.forEach((src, idx) => {
@@ -1148,7 +1148,7 @@ function buildThumbs() {
     strip.appendChild(img);
   });
 }
- 
+
 function updateThumbs() {
   document.querySelectorAll('.thumb').forEach((t, i) => {
     const active = isTwoPage()
@@ -1158,27 +1158,7 @@ function updateThumbs() {
     if (active) t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   });
 }
- 
-// Keyboard
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowLeft') prevPage();
-  if (e.key === 'ArrowRight') nextPage();
-});
- 
-// Touch swipe
-let touchX = 0;
-const sp = document.getElementById('spread');
-sp.addEventListener('touchstart', e => { touchX = e.changedTouches[0].screenX; });
-sp.addEventListener('touchend', e => {
-  const d = touchX - e.changedTouches[0].screenX;
-  if (Math.abs(d) > 50) d > 0 ? nextPage() : prevPage();
-});
- 
-window.addEventListener('resize', buildSpread);
- 
-buildThumbs();
-buildSpread();
- 
+
 // Keyboard
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') prevPage();
